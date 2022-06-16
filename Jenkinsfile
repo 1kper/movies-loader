@@ -1,5 +1,5 @@
 def imageName = 'mlabouardy/movies-loader'
-def registry = 'https://registry.slowcoder.com'
+def registry = '635154829813.dkr.ecr.us-east-1.amazonaws.com/mlabouardy/movies-loader'
 
 node('workers'){
     stage('Checkout'){
