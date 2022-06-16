@@ -18,7 +18,9 @@ node('workers'){
 
     stage('Push'){
         docker.withRegistry(registry, 'registry') {
-            docker.image(imageName).push(commitID())
+           
+ sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 635154829813.dkr.ecr.us-east-1.amazonaws.com${imageName}"
+ docker.image(imageName).push(commitID())
 
             if (env.BRANCH_NAME == 'develop') {
                 docker.image(imageName).push('develop')
