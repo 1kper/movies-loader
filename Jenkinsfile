@@ -25,12 +25,7 @@ node('workers'){
  sh "docker tag mlabouardy/movies-loader:latest 635154829813.dkr.ecr.us-west-2.amazonaws.com/mlabouardy/movies-loader:latest"
  sh "docker push 635154829813.dkr.ecr.us-west-2.amazonaws.com/mlabouardy/movies-loader:latest"
             
-            docker.image(imageName).push(commitID())
-
-            if (env.BRANCH_NAME == 'develop') {
-                docker.image(imageName).push('develop')
-            
-        }
+          
     }
 }
 
