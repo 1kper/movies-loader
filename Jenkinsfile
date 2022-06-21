@@ -19,7 +19,7 @@ node('workers'){
     }
 
     stage('Push'){
-         {
+         
            
  sh "aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 635154829813.dkr.ecr.us-west-2.amazonaws.com/mlabouardy/movies-loader"
  sh "docker tag mlabouardy/movies-loader:latest 635154829813.dkr.ecr.us-west-2.amazonaws.com/mlabouardy/movies-loader:latest"
@@ -29,7 +29,7 @@ node('workers'){
 
             if (env.BRANCH_NAME == 'develop') {
                 docker.image(imageName).push('develop')
-            }
+            
         }
     }
 }
