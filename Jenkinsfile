@@ -1,5 +1,7 @@
 def imageName = 'mlabouardy/movies-loader'
-def registry = '635154829813.dkr.ecr.us-east-1.amazonaws.com/mlabouardy/movies-loader'
+
+
+def registry = '635154829813.dkr.ecr.us-west-2.amazonaws.com/mlabouardy/movies-loader'
 
 node('workers'){
     stage('Checkout'){
@@ -19,8 +21,11 @@ node('workers'){
     stage('Push'){
         docker.withRegistry(registry, 'registry') {
            
- sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 635154829813.dkr.ecr.us-east-1.amazonaws.com/mlabouardy/movies-loader"
- docker.image(imageName).push(commitID())
+ sh "aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 635154829813.dkr.ecr.us-west-2.amazonaws.com/mlabouardy/movies-loader"
+ sh "docker tag mlabouardy/movies-loader:latest 635154829813.dkr.ecr.us-west-2.amazonaws.com/mlabouardy/movies-loader:latest"
+ sh "docker push 635154829813.dkr.ecr.us-west-2.amazonaws.com/mlabouardy/movies-loader:latest"
+            
+            docker.image(imageName).push(commitID())
 
             if (env.BRANCH_NAME == 'develop') {
                 docker.image(imageName).push('develop')
