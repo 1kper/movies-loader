@@ -1,7 +1,7 @@
 def imageName = 'mlabouardy/movies-loader'
 
 
-def registry = '635154829813.dkr.ecr.us-west-2.amazonaws.com/mlabouardy/movies-loader'
+def registry = '.dkr.ecr.us-west-2.amazonaws.com/mlabouardy/movies-loader'
 
 node('workers'){
     stage('Checkout'){
@@ -21,9 +21,9 @@ node('workers'){
     stage('Push'){
          
            
- sh "aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 635154829813.dkr.ecr.us-west-2.amazonaws.com/mlabouardy/movies-loader"
- sh "docker tag mlabouardy/movies-loader:latest 635154829813.dkr.ecr.us-west-2.amazonaws.com/mlabouardy/movies-loader:latest"
- sh "docker push 635154829813.dkr.ecr.us-west-2.amazonaws.com/mlabouardy/movies-loader:latest"
+ sh "aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin .dkr.ecr.us-west-2.amazonaws.com/mlabouardy/movies-loader"
+ sh "docker tag mlabouardy/movies-loader:latest .dkr.ecr.us-west-2.amazonaws.com/mlabouardy/movies-loader:latest"
+ sh "docker push .dkr.ecr.us-west-2.amazonaws.com/mlabouardy/movies-loader:latest"
             
           
     }
